@@ -70,7 +70,7 @@ const registerUser = asyncHandler( async (req, res) => {
     )
     
     // 8 
-    if(createdUser) {
+    if(!createdUser) {
         throw new ApiError(500, "Something went wrong while registering the user")
     }
 
