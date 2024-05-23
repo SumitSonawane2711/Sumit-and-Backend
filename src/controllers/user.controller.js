@@ -55,7 +55,7 @@ const registerUser = asyncHandler( async (req, res) => {
     // get the file path from the multer storage
 
     // console.log("multer:",req?.files);
-    
+
     // const avatarLocalPath = req.files?.avatar[0]?.path;
     // const coverImageLocalPath = req.files?.coverImage[0]?.path;
 
@@ -117,8 +117,9 @@ const loginUser = asyncHandler(async (req, res) => {
     //send cookie
 
     const {email,username,password} = req.body
+    // console.log("email", email);
 
-    if(!email || username) {
+    if(!(email || username)) {
         throw new ApiError(400, "username or password is required")
     }
 
