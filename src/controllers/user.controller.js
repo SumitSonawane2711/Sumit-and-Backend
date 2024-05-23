@@ -33,7 +33,7 @@ const registerUser = asyncHandler( async (req, res) => {
     
     // 1. get user details from frontend
     const {fullName, email, username, password } = req.body
-    console.log("email : ",email);
+    // console.log("email : ",email);
     
     // 2. validation  - not empty
     if (
@@ -54,17 +54,18 @@ const registerUser = asyncHandler( async (req, res) => {
     // 4. check for images, check for avatar in local storage
     // get the file path from the multer storage
 
-    console.log("multer:",req?.files);
-    //const avatarLocalPath = req.files?.avatar[0]?.path;
+    // console.log("multer:",req?.files);
+    
+    // const avatarLocalPath = req.files?.avatar[0]?.path;
     // const coverImageLocalPath = req.files?.coverImage[0]?.path;
 
     let coverImageLocalPath;
-    if(req.files && Array.isArray(req.files.coverImage && req.files.coverImage.length > 0)){
+    if(req.files && Array.isArray(req.files.coverImage ) && req.files.coverImage.length > 0){
         coverImageLocalPath = req.files.coverImage[0].path
     }
 
     let avatarLocalPath;
-    if(req.files && Array.isArray(req.files.avatar && req.files.avatar.length > 0)){
+    if(req.files && Array.isArray(req.files.avatar )&& req.files.avatar.length > 0){
         avatarLocalPath = req.files.avatar[0].path
     }
     
@@ -115,9 +116,9 @@ const loginUser = asyncHandler(async (req, res) => {
     //access and refresh token
     //send cookie
 
-    const {email,password} = req.body
+    const {email,username,password} = req.body
 
-    if(!email ) {
+    if(!email || username) {
         throw new ApiError(400, "username or password is required")
     }
 
