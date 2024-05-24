@@ -14,7 +14,7 @@ const generateAccessAndRefreshToken = async(userId)=>{
 
         user.refreshToken = refreshToken
         await user.save({validateBeforeSave: false})
-
+ 
         return {accessToken,refreshToken}
     } catch (error) {
         throw new ApiError(500, "Something went wrong while generating refresh and access token")
@@ -327,7 +327,7 @@ const updateUsercoverImage = asyncHandler(async(req,res)=>{
     }
 
     const user = await User.findByIdAndUpdate(
-        rea.user?._id,
+        req.user?._id,
         {
             $set : {
                 avatar: coverImage.url
@@ -338,7 +338,7 @@ const updateUsercoverImage = asyncHandler(async(req,res)=>{
 
     return res
     .status(200)
-    .json(new ApiResponse(200,"user coverImage updated successfully"))
+    .json(new ApiResponse(200,user,"user coverImage updated successfully"))
 })
 
 export {
